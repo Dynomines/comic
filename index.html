@@ -5,11 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comic | Dynomines.dev</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
-        img { max-height: 70vh; width: auto; }
+        body { text-align: center; font-family: Arial, sans-serif; font-size: 16px; }
+
+
+        img {
+            max-height: 70vh;
+            width: auto;
+        }
+
+        h1 { font-size: 2rem; /* 32px (2 * 16px) */ }
+        h2 { font-size: 1.75rem; /* 28px (1.75 * 16px) */ }
+        h4 { font-size: 1.25rem; /* 20px (1.25 * 16px) */ }
+        h5 { font-size: 1rem; /* 16px (1 * 16px) */ }
+        
+        /* Responsive Scaling (adjusting for smaller screens) */
+        @media (max-width: 1200px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.6rem; }
+            h4 { font-size: 1.3rem; }
+            h5 { font-size: 1.1rem; }
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.6rem; }
+            h3 { font-size: 1.4rem; }
+            h4 { font-size: 1.2rem; }
+            h5 { font-size: 1rem; }
+        }
+        
+        /* For very small screens (mobile) */
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.4rem; }
+            h3 { font-size: 1.2rem; }
+            h4 { font-size: 1rem; }
+            h5 { font-size: 0.9rem; }
+        }
     </style>
 
-    <!-- Graph tags -->
+    <!-- Open Graph Tags -->
     <meta property="og:title" content="Comic | Dynomines.dev">
     <meta property="og:description" content="(Mostly) Weekly comics">
     <meta property="og:image" content="https://dynomines.dev/comic/3.png">
@@ -44,11 +80,13 @@
         function prevComic() {
             currentComic = Math.max(1, currentComic - 1);
             updateComic();
+            adjustImageSize();
         }
 
         function nextComic() {
             currentComic = Math.min(totalComics, currentComic + 1);
             updateComic();
+            adjustImageSize();
         }
 
         function randomComic() {
@@ -58,19 +96,40 @@
             } while (newComic === currentComic); // Ensure different comic
             currentComic = newComic;
             updateComic();
+            adjustImageSize();
         }
 
         // Load comic from URL hash on page load
         window.onload = () => {
             currentComic = getComicFromHash();
             updateComic();
+            adjustImageSize();
         };
 
         // Update comic when hash changes (e.g., user types a new hash)
         window.onhashchange = () => {
             currentComic = getComicFromHash();
             updateComic();
+            adjustImageSize();
         };
+
+        // Adjust the image size dynamically based on the smaller screen dimension
+        function adjustImageSize() {
+            const img = document.getElementById("comic");
+            if (window.innerWidth < window.innerHeight) {
+                img.style.maxHeight = "";
+                img.style.width = "";
+                img.style.maxWidth = "70vw";
+                img.style.height = "auto";
+            } else {
+                img.style.maxWidth = "";
+                img.style.height = "";
+                img.style.maxHeight = "70vh";
+                img.style.width = "auto";
+            }
+        }
+
+        window.addEventListener("resize", adjustImageSize);
     </script>
 </body>
 </html>

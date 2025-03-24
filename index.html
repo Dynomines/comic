@@ -48,7 +48,7 @@
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Comic | Dynomines.dev">
     <meta property="og:description" content="(Mostly) Weekly comics">
-    <meta property="og:image" content="https://dynomines.dev/comic/3.png">
+    <meta property="og:image" content="https://dynomines.dev/comic/l/4.png">
     <meta property="og:url" content="https://dynomines.dev/comic/">
     <meta property="og:type" content="website">
 </head>
@@ -61,7 +61,7 @@
         <button onclick="nextComic()">Next</button>
     </div>
     <script>
-        const totalComics = 3; // Adjust based on your total comic count
+        const totalComics = 4; // Adjust based on your total comic count
         let currentComic = 1;
 
         function getComicFromHash() {
@@ -72,7 +72,7 @@
 
         function updateComic() {
             window.location.hash = `#${currentComic}`;
-            document.getElementById("comic").src = `${currentComic}.png`;
+            document.getElementById("comic").src = `l/${currentComic}.png`;
             document.getElementById("comic").title = `Comic #${currentComic}`; // Hover text
             document.getElementById("comicTitle").innerHTML = `Comic #${currentComic}`;
         }
